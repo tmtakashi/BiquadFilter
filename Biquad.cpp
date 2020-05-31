@@ -1,6 +1,5 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
-#include <iostream>
 #include "Biquad.h"
 
 Biquad::Biquad(FilterType filterType, double fs, double f0, double Q) : mfilterType(filterType), mfs(fs), mf0(f0), mQ(Q)
