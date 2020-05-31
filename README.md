@@ -1,6 +1,6 @@
 # BiquadFilter
 
-A C++ implementation of (Audio EQ Cookbok)[https://www.w3.org/2011/audio/audio-eq-cookbook.html].
+A C++ implementation of [Audio EQ Cookbok](https://www.w3.org/2011/audio/audio-eq-cookbook.html).
 
 ## Usage
 
