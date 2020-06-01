@@ -58,16 +58,6 @@ Biquad::Biquad(FilterType filterType, double fs, double f0, double Q) : mfilterT
         mb2 = 1.0 + alpha;
         break;
     }
-    case FilterType::Peaking:
-    {
-        ma0 = 1.0 + alpha;
-        ma1 = -2.0 * std::cos(omega0);
-        ma2 = 1.0 - alpha;
-        mb0 = 1.0 - alpha;
-        mb1 = -2.0 * std::cos(omega0);
-        mb2 = 1.0 + alpha;
-        break;
-    }
     default:
         break;
     }
