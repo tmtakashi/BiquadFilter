@@ -1,12 +1,25 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
+#include <iostream>
 #include "Biquad.h"
 
-Biquad::Biquad(FilterType filterType, double fs, double f0, double Q) : mfilterType(filterType), mfs(fs), mf0(f0), mQ(Q)
+void Biquad::setParams(const Parameters& params)
 {
-    double omega0 = 2.0f * M_PI * (mf0 / mfs);
-    double alpha = std::sin(omega0) / (2.0 * mQ);
-    switch (filterType)
+    mparams = params;
+    calculateCoeffs();
+}
+
+Parameters Biquad::getParams()
+{
+    return mparams;
+}
+
+void Biquad::calculateCoeffs()
+{
+    double omega0 = 2.0f * M_PI * (mparams.f0 / mparams.fs);
+    double alpha = std::sin(omega0) / (2.0 * mparams.Q);
+    double A = std::pow(10, mparams.dBGain / 40.0);
+    switch (mparams.filterType)
     {
     case FilterType::LowPass:
     {
@@ -58,18 +71,6 @@ Biquad::Biquad(FilterType filterType, double fs, double f0, double Q) : mfilterT
         mb2 = 1.0 + alpha;
         break;
     }
-    default:
-        break;
-    }
-}
-
-Biquad::Biquad(FilterType filterType, double fs, double f0, double Q, double dbGain) : mfilterType(filterType), mfs(fs), mf0(f0), mQ(Q), mdBGain(dbGain)
-{
-    double omega0 = 2.0f * M_PI * (mf0 / mfs);
-    double alpha = std::sin(omega0) / (2.0 * mQ);
-    double A = std::pow(10, mdBGain / 40.0);
-    switch (filterType)
-    {
     case FilterType::Peaking:
     {
         ma0 = 1.0 + alpha / A;
