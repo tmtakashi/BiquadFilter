@@ -1,3 +1,6 @@
+#ifndef BIQUAD_H_
+#define BIQUAD_H_
+
 enum class FilterType
 {
     LowPass = 1,
@@ -41,3 +44,6 @@ public:
     Parameters getParams();
     double process(double x);
 };
+
+#endif // BIQUAD_H_
+
